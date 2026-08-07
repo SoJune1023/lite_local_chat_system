@@ -9,7 +9,7 @@ BASE_URL = "http://127.0.0.1:8000"
 console = Console()
 
 async def chat_loop() -> None:
-    console.print("[bold cyan]ollama chat[/bold cyan]  [dim](/exit 로 종료)[/dim]\n")
+    console.print("[bold cyan]ollama chat[/bold cyan]  [dim](/exit to quit)[/dim]\n")
 
     async with httpx.AsyncClient(base_url=BASE_URL, timeout=120) as client:
         while True:
@@ -19,7 +19,7 @@ async def chat_loop() -> None:
             if not user_input.strip():
                 continue
 
-            with console.status("[dim]생각 중...[/dim]", spinner="dots"):
+            with console.status("[dim]Thinking...[/dim]", spinner="dots"):
                 try:
                     res = await client.post(
                         "/interaction",
@@ -27,10 +27,10 @@ async def chat_loop() -> None:
                     )
                     res.raise_for_status()
                 except httpx.ConnectError:
-                    console.print("[bold red]서버 연결 실패[/bold red] — python -m src 로 서버부터 켜둬")
+                    console.print("[bold red]Failed to connect server[/bold red]")
                     break
                 except httpx.HTTPStatusError as e:
-                    console.print(f"[bold red]서버 에러[/bold red] {e.response.status_code}: {e.response.text}")
+                    console.print(f"[bold red]Server Error[/bold red] {e.response.status_code}: {e.response.text}")
                     continue
 
             data = res.json()
