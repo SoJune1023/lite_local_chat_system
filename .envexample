@@ -1,0 +1,3 @@
+PROMPT_PATH=/<path_to_project>/lite_local_chat_system/prompt.txt
+HISTORY_PATH=/<path_to_project>/lite_local_chat_system/history.json
+OLLAMA_MODEL=qwen3.6:27b
