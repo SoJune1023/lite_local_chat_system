@@ -1,9 +1,12 @@
+import os
 import logging
 
 from typing import List, Dict
 from ollama import AsyncClient, ResponseError
 
 logger = logging.getLogger(__name__)
+
+MODEL = os.getenv('OLLAMA_MODEL')
 
 class ResponseMaker:
     async def _get_response(
@@ -12,7 +15,7 @@ class ResponseMaker:
     ) -> str:
         try:
             response = await AsyncClient().chat(
-                model='qwen3.6:27b',
+                model=MODEL,
                 messages=history
             )
 
