@@ -42,7 +42,7 @@ def main() -> None:
     try:
         asyncio.run(chat_loop())
     except KeyboardInterrupt:
-        console.print("\n[dim]종료됨[/dim]")
+        console.print("\n[dim]End[/dim]")
 
 if __name__ == "__main__":
     main()
