@@ -52,10 +52,11 @@ src/
 ├── cli.py                    # httpx + rich CLI 클라이언트
 ├── routers/interaction.py    # POST /interaction 엔드포인트
 ├── handlers/interaction.py   # Request handling 로직
+├── clients/                  # Anthropic 그리고 ollama 클라이언트
 ├── services/
 │   ├── history_loader.py     # JSON 파일에서 히스토리 읽기
 │   ├── history_saver.py      # 새 턴 추가 후 저장
 │   ├── prompt_loader.py      # txt 파일에서 프롬프트 읽기
-│   └── response_maker.py     # Ollama AsyncClient 불러오기
+│   └── response_maker.py     # LLM 클라이언트 호출부
 └── schemas/                  # 스키마들
 ```
