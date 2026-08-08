@@ -221,3 +221,7 @@ __marimo__/
 
 # MacOS
 .DS_Store
+
+# Prompt and History
+history.json
+prompt.txt
