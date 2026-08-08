@@ -10,6 +10,7 @@ Developed without vibe-coding. Total working time: 2 hours.
 - Python 3.13+
 - [uv](https://github.com/astral-sh/uv)
 - [Ollama](https://ollama.com/)
+- [Tavily API Key](https://app.tavily.com/)
 
 ## How to use
 
