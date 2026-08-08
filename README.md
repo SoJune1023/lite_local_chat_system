@@ -52,10 +52,11 @@ src/
 ├── cli.py                    # httpx + rich CLI client
 ├── routers/interaction.py    # POST /interaction endpoint
 ├── handlers/interaction.py   # Request handling logic
+├── clients/                  # Anthropic and ollama client
 ├── services/
 │   ├── history_loader.py     # Reading history from a JSON file
 │   ├── history_saver.py      # Add a new turn and save
 │   ├── prompt_loader.py      # Reading prompt from a txt file
-│   └── response_maker.py     # Calling Ollama AsyncClient
+│   └── response_maker.py     # Calling LLM API client
 └── schemas/                  # Schemas
 ```
