@@ -2,8 +2,8 @@
 
 [[English](./README.md) | 한국어]
 
-오버 엔지니어링 없이 깔끔한 ollama를 이용한 대화 프로그램.  
-바이브 코딩 없이 개발. 총 개발 시간: 2시간.  
+오버 엔지니어링 없이 깔끔한 ollama / claude를 이용한 대화 프로그램.  
+바이브 코딩 없이 개발.
 
 ## 요구사항
 
@@ -11,6 +11,7 @@
 - [uv](https://github.com/astral-sh/uv)
 - [Ollama](https://ollama.com/)
 - [Tavily API Key](https://app.tavily.com/)
+- [[선택사항]Anthropic API Key](https://platform.claude.com/)
 
 ## 사용방법
 
