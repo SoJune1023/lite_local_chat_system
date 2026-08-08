@@ -2,8 +2,8 @@
 
 [English | [한국어](./README.ko.md)]
 
-A clean chat program using Ollama without over-engineering.  
-Developed without vibe-coding. Total working time: 2 hours.  
+A clean chat program using Ollama / Claude without over-engineering.  
+Developed without vibe-coding.
 
 ## Requirements
 
@@ -11,6 +11,7 @@ Developed without vibe-coding. Total working time: 2 hours.
 - [uv](https://github.com/astral-sh/uv)
 - [Ollama](https://ollama.com/)
 - [Tavily API Key](https://app.tavily.com/)
+- [[Optional]Anthropic API Key](https://platform.claude.com/)
 
 ## How to use
 
