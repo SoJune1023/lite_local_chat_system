@@ -21,19 +21,19 @@ class Client:
         async with httpx.AsyncClient(base_url=BASE_URL, timeout=httpx.Timeout(600)) as client:
             while True:
                 user_input = Prompt.ask("[bold green]you[/bold green]")
-                
-                if user_input.strip().lower() in ("/exit", "/quit"):
+                cmd = user_input.strip().lower()
+
+                if cmd in ("/exit", "/quit"):
                     break
 
-                if user_input.strip().lower() in ("/ollama"):
-                    console.print(f"[bold green]Changing model : {self._model} -> ollama[/bold green]")
-                    self._model = "ollama"
+                if cmd in ("/ollama", "/claude"):
+                    new_model = cmd[1:]
+                    console.print(f"[bold green]Changing model : {self._model} -> {new_model}[/bold green]")
+                    self._model = new_model
                     console.print(f"[bold green]Model changed![/bold green]")
-                elif user_input.strip().lower() in ("/claude"):
-                    console.print(f"[bold green]Changing model : {self._model} -> claude[/bold green]")
-                    console.print(f"[bold green]Model changed![/bold green]")
-                
-                if not user_input.strip():
+                    continue
+
+                if not cmd:
                     continue
 
                 with console.status("[dim]Thinking...[/dim]", spinner="dots"):
