@@ -10,6 +10,7 @@
 - Python 3.13+
 - [uv](https://github.com/astral-sh/uv)
 - [Ollama](https://ollama.com/)
+- [Tavily API Key](https://app.tavily.com/)
 
 ## 사용방법
 

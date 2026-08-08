@@ -11,7 +11,7 @@ console = Console()
 async def chat_loop() -> None:
     console.print("[bold cyan]ollama chat[/bold cyan]  [dim](/exit to quit)[/dim]\n")
 
-    async with httpx.AsyncClient(base_url=BASE_URL, timeout=120) as client:
+    async with httpx.AsyncClient(base_url=BASE_URL, timeout=httpx.Timeout(600)) as client:
         while True:
             user_input = Prompt.ask("[bold green]you[/bold green]")
             if user_input.strip().lower() in ("/exit", "/quit"):
