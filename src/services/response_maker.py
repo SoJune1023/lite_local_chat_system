@@ -1,10 +1,10 @@
 import os
 import logging
 
-from typing import List, Dict
-from ollama import AsyncClient, ResponseError, ChatResponse
+from typing import List, Dict, Literal
 
-from src.tools.web_search import web_search
+from src.clients.claude import Claude
+from src.clients.ollama import Ollama
 
 logger = logging.getLogger(__name__)
 
@@ -12,50 +12,29 @@ MODEL = os.getenv('OLLAMA_MODEL')
 MAX_ROUNDS = 5
 
 class ResponseMaker:
-    _client: AsyncClient
+    _model: Literal['ollama', 'claude']
 
-    def __init__(self):
-        self._client = AsyncClient()
+    def __init__(
+        self,
+        model: Literal['ollama', 'claude']
+    ) -> None:
+        self._model = model
 
     async def _get_response(
         self,
         history: List[Dict[str, str]]
     ) -> str:
-        for _ in range(MAX_ROUNDS):
-            try:
-                response: ChatResponse = await self._client.chat(
-                    model=MODEL,
-                    messages=history,
-                    tools=[web_search],
-                )
-            except ResponseError as e:
-                logger.error(f"Could not get response from ollama")
-                raise RuntimeError(f"Could not get response from ollama") from e
+        if self._model == 'claude':
+            responser = Claude()
+            response = await responser.run(history)
+        elif self._model == 'ollama':
+            responser = Ollama()
+            response = await responser.run(history)
+        else:
+            raise RuntimeError(f"Unknown model: {self._model}")
 
-            if not response.message.tool_calls:
-                return response.message.content
-
-            history.append(response.message)
-
-            for tool in response.message.tool_calls:
-                if tool.function.name == 'web_search':
-                    try:
-                        result = web_search(**tool.function.arguments)
-                    except Exception as e:
-                        logger.error(f"Web search failed.")
-                        raise RuntimeError(f"Web search failed.") from e
-                else:
-                    logger.error(f"Unknown tool: {tool.function.name}")
-                    raise RuntimeError(f"Unknown tool: {tool.function.name}")
-
-                history.append({
-                    'role': 'tool',
-                    'content': result,
-                    'tool_name': tool.function.name,
-                })
-
-        raise RuntimeError(f"Tool call loop exceeded {MAX_ROUNDS} rounds")
-
+        return response
+        
     async def run(
         self,
         history: List[Dict[str, str]]

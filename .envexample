@@ -1,4 +1,6 @@
 PROMPT_PATH=/<path_to_project>/lite_local_chat_system/prompt.txt
 HISTORY_PATH=/<path_to_project>/lite_local_chat_system/history.json
 OLLAMA_MODEL=qwen3.6:27b
+ANTHROPIC_MODEL=claude-opus-5
 TAVILY_API_KEY=<YOUR_TAVILY_API_KEY_HERE>
+ANTHROPIC_API_KEY=<YOUR_ANTHROPIC_API_KEY_HERE>
