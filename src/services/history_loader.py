@@ -16,7 +16,10 @@ class HistoryLoader:
     def __init__(self):
         self.history = None
 
-    def _read_file(self) -> Literal[True]:
+    def _read_file(
+        self,
+        max_messages: int
+    ) -> None:
         try:
             with open(HISTORY_PATH, 'r', encoding='utf-8') as f:
                 content = f.read().strip()
@@ -25,13 +28,15 @@ class HistoryLoader:
                 self.history = History(history=[])
             else:
                 data = json.loads(content)
-                self.history = History(history=[]) if not data else History.model_validate(data)
-
-            return True
+                history_obj = History(history=[]) if not data else History.model_validate(data)
+                self.history = History(history=history_obj.history[-max_messages:])
         except FileNotFoundError as e:
             logger.error(f"Could not found history. History path : {HISTORY_PATH}")
             raise e
 
-    def run(self) -> History:
-        self._read_file()
+    def run(
+        self,
+        max_messages: int = 12
+    ) -> History:
+        self._read_file(max_messages)
         return self.history

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Optional, Literal, List, Dict
 from pydantic import BaseModel
 
 class InteractionRequest(BaseModel):
@@ -7,3 +7,10 @@ class InteractionRequest(BaseModel):
 
 class InteractionResponse(BaseModel):
     message: str
+
+
+class GetHistoryRequest(BaseModel):
+    max_messages: int
+
+class GetHistoryResponse(BaseModel):
+    messages: Optional[List[Dict[str, str]]]

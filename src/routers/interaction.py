@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, Depends
+from fastapi import APIRouter, status
 
 from src.schemas.router import InteractionRequest, InteractionResponse
 from src.handlers.interaction import InteractionHandler
