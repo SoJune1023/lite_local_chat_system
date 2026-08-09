@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const BASE_URL = 'http://127.0.0.1:8000';
 
+    function mapRole(serverRole) {
+        if (serverRole === 'user') return 'you';
+        if (serverRole === 'assistant') return 'ai';
+        return serverRole;
+    }
+
     async function sendInteraction() {
         const message = messageInput.value.trim();
         const model = modelSelect.value;
@@ -14,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         interactionBtn.disabled = true;
         const prevText = interactionBtn.textContent;
-        interactionBtn.textContent = 'Thinking...';
+        interactionBtn.textContent = 'Thinking . . .';
 
         appendMessage('you', message);
         messageInput.value = '';
@@ -48,6 +54,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function loadHistory(maxMessages = 50) {
+        interactionBtn.disabled = true;
+        const prevText = interactionBtn.textContent;
+        interactionBtn.textContent = 'Load history . . .';
+
+        const request_dict = {
+            max_messages: 50
+        };
+
+        try {
+            const res = await fetch(
+                `${BASE_URL}/interaction/history?max_messages=${maxMessages}`
+            );
+
+            if (!res.ok) {
+                const errText = await res.text();
+                appendMessage('error', `Server Error ${res.status}: ${errText}`);
+                return;
+            }
+
+            const data = await res.json();
+
+            data.messages.forEach((msg) => {
+                appendMessage(mapRole(msg.role), msg.content);
+            });
+        } catch (err) {
+            appendMessage('error', `Failed to connect server: ${err.message}`);
+        } finally {
+            interactionBtn.disabled = false;
+            interactionBtn.textContent = prevText;
+        }
+    }
+
     function appendMessage(role, text) {
         if (!chatOutput) {
             console.error('chatOutput element not found');
@@ -59,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chatOutput.appendChild(el);
         chatOutput.scrollTop = chatOutput.scrollHeight;
     }
+
+    loadHistory();
 
     interactionBtn.addEventListener('click', (e) => {
         e.preventDefault();

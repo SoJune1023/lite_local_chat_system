@@ -1,9 +1,9 @@
 from typing import Optional, List, Dict
 
-from src.schemas.router import GetHistoryRequest, GetHistoryResponse
+from src.schemas.router import GetHistoryResponse
 from src.services.history_loader import HistoryLoader
 
-class GetHistory:
+class GetHistoryHandler:
     @classmethod
     def _load_history(
         cls,
@@ -15,10 +15,10 @@ class GetHistory:
 
     async def process(
         cls,
-        data: GetHistoryRequest
+        max_messages: int
     ) -> GetHistoryResponse:
-        history = cls._load_history(data.max_messages)
+        history = cls._load_history(max_messages)
 
         return GetHistoryResponse(
-            messages=history
+            messages=history.history
         )

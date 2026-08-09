@@ -9,8 +9,5 @@ class InteractionResponse(BaseModel):
     message: str
 
 
-class GetHistoryRequest(BaseModel):
-    max_messages: int
-
 class GetHistoryResponse(BaseModel):
     messages: Optional[List[Dict[str, str]]]
