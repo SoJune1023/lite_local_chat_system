@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lite local chat system</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Lite local chat system</h1>
+            <select id="modelSelect">
+                <option value="claude">Claude</option>
+                <option value="ollama">Ollama</option>
+            </select>
+        </header>
+
+        <div id="chatOutput"></div>
+
+        <div class="input-bar">
+            <textarea id="messageInput" rows="1" placeholder="Type message here . . ."></textarea>
+            <button id="interactionBtn" type="button">Send</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
