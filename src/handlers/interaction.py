@@ -48,9 +48,10 @@ class InteractionHandler:
     @classmethod
     async def _make_response(
         cls,
+        model: Literal['ollama', 'claude'],
         history: List[Dict[str, str]]
     ) -> str:
-        maker = ResponseMaker()
+        maker = ResponseMaker(model)
         response = await maker.run(history)
         return response
 
@@ -73,7 +74,7 @@ class InteractionHandler:
         history = cls._load_history()
         full_history = cls._make_prompt(history, data.message, prompt)
 
-        response = await cls._make_response(full_history)
+        response = await cls._make_response(data.model, full_history)
 
         cls._save_data(data.message, response)
 

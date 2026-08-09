@@ -3,7 +3,7 @@
 [English | [한국어](./README.ko.md)]
 
 A clean chat program using Ollama / Claude without over-engineering.  
-Developed without vibe-coding.
+Developed without vibe-coding (Only back-end).
 
 ## Requirements
 
