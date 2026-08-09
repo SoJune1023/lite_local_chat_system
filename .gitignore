@@ -225,3 +225,6 @@ __marimo__/
 # Prompt and History
 history.json
 prompt.txt
+
+# vsc
+.vscode/
