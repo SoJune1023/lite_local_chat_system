@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const el = document.createElement('div');
         el.className = `message message-${role}`;
-        el.innerHTML = `<strong>${role}</strong>: ${text}`;
+        el.innerHTML = `<strong>${role.toUpperCase()}</strong>${text}`;
         chatOutput.appendChild(el);
         chatOutput.scrollTop = chatOutput.scrollHeight;
     }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     messageInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
+        if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
             e.preventDefault();
             sendInteraction();
         }

@@ -66,9 +66,8 @@ header h1 {
     display: block;
     font-size: 11px;
     opacity: 0.6;
-    margin-bottom: 4px;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
+    margin-bottom: 4px;
 }
 
 .message-you {
