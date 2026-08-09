@@ -16,7 +16,7 @@ class Client:
         self._model = 'claude'
 
     async def chat_loop(self) -> None:
-        console.print("[bold cyan]ollama chat[/bold cyan]  [dim](/exit to quit)[/dim]\n")
+        console.print("[bold cyan]lite local chat system[/bold cyan]  [dim](/exit to quit)[/dim]\n")
 
         async with httpx.AsyncClient(base_url=BASE_URL, timeout=httpx.Timeout(600)) as client:
             while True:

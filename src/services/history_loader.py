@@ -2,7 +2,6 @@ import os
 import json
 import logging
 
-from pathlib import Path
 from typing import Literal, Optional
 
 from src.schemas.context import History
@@ -33,6 +32,6 @@ class HistoryLoader:
             logger.error(f"Could not found history. History path : {HISTORY_PATH}")
             raise e
 
-    def run(self) -> str:
+    def run(self) -> History:
         self._read_file()
         return self.history
